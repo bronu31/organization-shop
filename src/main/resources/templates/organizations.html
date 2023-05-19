@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+  <style>
+        main {color: red}
+        main b {color: blue}
+        main p {color: green}
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/students}">Student management</a>
+        <a class="nav-link" th:href="@{/shop/products}">Products</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+Companies
+
+<div class="container">
+  <div class="row">
+    <h1> List of organizations </h1>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <a th:href="@{/organization/new}" class="btn btn-primary btn-sm mb-3">Add organization</a>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+      <th> Organization image</th>
+      <th> Organization name</th>
+      <th> Organization description</th>
+      <th> Organization banned</th>
+      <th> Organization actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="organization:${organizations}">
+      <td><img th:src="${organization.org_image}"style="width:50px;height:50px;"></td>
+      <td th:text="${organization.org_name}"></td>
+      <td th:text="${organization.org_description}"></td>
+      <td th:text="${organization.banned}"></td>
+      <td>
+        <a th:href="@{/students/edit/{id}(id=${organization.id})}" class="btn btn-primary">Edit</a>
+        <a th:unless = "${organization.banned}" th:href="@{/organization/ban/{id}(id=${organization.id})}" class="btn btn-danger">Ban</a>
+        <a th:if = "${organization.banned}" th:href="@{/organization/unban/{id}(id=${organization.id})}" class="btn btn-danger">Unban</a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
