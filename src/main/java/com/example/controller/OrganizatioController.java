@@ -22,7 +22,6 @@ public class OrganizatioController {
 
     @GetMapping("/organizations")
     public String companiesPage(Model model){
-        System.out.println(model.addAttribute("organizations",organizationService.getAllorganizations()));
         model.addAttribute("organizations",organizationService.getAllorganizations());
         return "/organizations";
     }
@@ -31,8 +30,6 @@ public class OrganizatioController {
     public String banOrganization(@PathVariable Long id,
                                   Model model){
         Organization organization=organizationService.getorganizationById(id);
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        System.out.println(organization.toString());
         organization.setBanned(true);
         organizationService.saveorganization(organization);
 

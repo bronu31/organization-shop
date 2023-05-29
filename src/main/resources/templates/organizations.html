@@ -58,7 +58,10 @@ Companies
     </thead>
     <tbody>
     <tr th:each="organization:${organizations}">
-      <td><img th:src="${organization.org_image}"style="width:50px;height:50px;"></td>
+      <td>
+        <img th:if = "${organization.org_image}" th:src="${organization.org_image}"style="width:50px;height:50px;">
+      </td>
+
       <td th:text="${organization.org_name}"></td>
       <td th:text="${organization.org_description}"></td>
       <td th:text="${organization.banned}"></td>

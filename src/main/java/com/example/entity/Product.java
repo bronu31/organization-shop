@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-//@Entity
+@Entity
 @NoArgsConstructor
 public class Product {
 
@@ -41,13 +41,13 @@ public class Product {
 
     private Integer in_stock;
 
+    //private Sale sale_id;
+
+    //private List<Reviews> reviews;
     private String[] keywords;
 
-    private Sale sale_id;
-
-    private List<Reviews> reviews;
-
     //TODO Сделать таблицу характеристик private
-
+    //на будущее так как понятия не имею как это реализовать
     private Float rating;
+
 }

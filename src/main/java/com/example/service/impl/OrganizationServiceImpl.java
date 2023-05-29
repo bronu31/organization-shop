@@ -55,7 +55,6 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     public void saveOrgFile(String uploadDir, String fileName,
                             MultipartFile multipartFile) throws IOException {
-        System.out.println("Enter");
         Path uploadPath = Paths.get(uploadDir);
 
         if (!Files.exists(uploadPath)) {
