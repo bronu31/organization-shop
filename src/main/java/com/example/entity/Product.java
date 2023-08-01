@@ -1,53 +1,56 @@
 package com.example.entity;
 
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.service.OrganizationService;
+import com.example.service.impl.OrganizationServiceImpl;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
-    public Product(Integer id, String prod_name,
-                   String prod_description, Integer org_id,
-                   Float price, Integer in_stock, String[] keywords) {
+    public Product(Long id, String prodName,
+                   String prodDescription, Organization orgId,
+                   Float price, Integer inStock, String keywords) {
         this.id = id;
-        this.prod_name = prod_name;
-        this.prod_description = prod_description;
-        this.org_id = org_id;
+        this.prodName = prodName;
+        this.prodDescription = prodDescription;
+        this.orgId = orgId;
         this.price = price;
-        this.in_stock = in_stock;
+        this.inStock = inStock;
         this.keywords = keywords;
     }
-@Id
-@GeneratedValue
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+    private Long id;
 
-    private String prod_name;
+    private String prodName;
 
-    private String prod_description;
+    private String prodDescription;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Organization orgId;
 
-    private Integer org_id;
 
     private Float price;
 
-    private Integer in_stock;
+    private Integer inStock;
 
-    //private Sale sale_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Sale saleId;
 
     //private List<Reviews> reviews;
-    private String[] keywords;
+    private String keywords;
 
     //TODO Сделать таблицу характеристик private
     //на будущее так как понятия не имею как это реализовать
     private Float rating;
+
 
 }

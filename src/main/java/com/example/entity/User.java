@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
 @Id
 @GeneratedValue
-    private Integer id;
+    private Long id;
 
     private String email;
 
@@ -20,23 +20,15 @@ public class User {
 
     private Float Balance;
 
-    private Boolean admin;
 
     //private List<Integer> bought_prod;
 
-    public User(Integer id, String email, String password, Float balance) {
+    public User(Long id, String email, String password, Float balance) {
         this.id = id;
         this.email = email;
         this.password = password;
         Balance = balance;
-        this.admin = false;
     }
 
-    public User(Integer id, String email, String password, Float balance, Boolean admin) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        Balance = balance;
-        this.admin = admin;
-    }
+
 }

@@ -4,9 +4,6 @@ package com.example.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -17,40 +14,40 @@ import java.util.List;
 @Table(name = "organization")
 public class Organization {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organization_seq")
     private Long id;
 
-    private String org_name;
+    private String orgName;
 
-    private String org_description;
+    private String orgDescription;
 
-    private String org_image;
+    private String orgImage;
 
     @Transient
-    public String getOrg_image(){
-        if(org_image==null||id==null) return null;
-        return "/org_images/"+id+"/"+org_image;
+    public String getOrgImage(){
+        if(orgImage ==null||id==null) return null;
+        return "/org_images/"+id+"/"+ orgImage;
     }
 
     //private List<Integer> org_product;
 
     private Boolean banned;
 
-    public Organization(Long id, String org_name,
-                        String org_description,String org_image) {
+    public Organization(Long id, String OrgName,
+                        String OrgDescription, String OrgImage) {
         this.id = id;
-        this.org_name = org_name;
-        this.org_description = org_description;
-        this.org_image = org_image;
+        this.orgName = OrgName;
+        this.orgDescription = OrgDescription;
+        this.orgImage = OrgImage;
         //this.org_product = new ArrayList<>();
         this.banned=false;
     }
 
-    public Organization(Long id, String org_name,
-                        String org_description) {
+    public Organization(Long id, String OrgName,
+                        String OrgDescription) {
         this.id = id;
-        this.org_name = org_name;
-        this.org_description = org_description;
+        this.orgName = OrgName;
+        this.orgDescription = OrgDescription;
         //this.org_product = new ArrayList<>();
         this.banned=false;
     }

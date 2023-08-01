@@ -8,6 +8,7 @@ import com.example.service.OrganizationService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -69,6 +70,15 @@ public class OrganizationServiceImpl implements OrganizationService {
         }
 
 
+    }
+
+    @Override
+    public Organization getOrganizationByName(String name) {
+        Organization organization= organizationRepository.findByOrgName(name);
+        if (organization==null){
+            throw new EntityNotFoundException("Organization not found");
+        }
+        return organization;
     }
 
 

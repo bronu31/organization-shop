@@ -19,6 +19,6 @@ public interface OrganizationService {
 
     public void saveOrgFile(String uploadDir, String fileName,
                             MultipartFile multipartFile)  throws IOException;
-
+    Organization getOrganizationByName(String name);
 
 }

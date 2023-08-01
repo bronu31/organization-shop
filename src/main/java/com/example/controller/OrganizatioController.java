@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import com.example.entity.Organization;
-import com.example.entity.Student;
 import com.example.service.OrganizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,7 +60,7 @@ public class OrganizatioController {
                                   ,@RequestParam("org_image") MultipartFile multipartFile) throws IOException {
 
         String file_name= StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        organization.setOrg_image(file_name);
+        organization.setOrgImage(file_name);
 
 
 
@@ -71,5 +70,9 @@ public class OrganizatioController {
 
         organizationService.saveorganization(organization);
         return "redirect:/organizations";
+    }
+    @GetMapping("/test")
+    public  String test(){
+        return "/aaa";
     }
 }
