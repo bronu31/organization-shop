@@ -1,10 +1,12 @@
 package com.example.service.impl;
 
+import com.example.entity.Organization;
 import com.example.entity.Product;
 import com.example.repository.ProductRepository;
 import com.example.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.websocket.server.ServerEndpoint;
 import java.util.List;
 
@@ -42,4 +44,14 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
     }
+
+    @Override
+    public Product getProductByName(String s) {
+        Product product= productRepository.findByProdName(s);
+        if (product==null){
+            throw new EntityNotFoundException("Organization not found");
+        }
+        return product;
+    }
+
 }

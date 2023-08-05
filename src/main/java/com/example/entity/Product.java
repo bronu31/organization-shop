@@ -6,6 +6,7 @@ import com.example.service.impl.OrganizationServiceImpl;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,9 +42,13 @@ public class Product {
 
     private Integer inStock;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private Sale saleId;
+    @JoinTable(
+            name = "active_sales",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "sale_id"))
+    private List<Sale> saleId;
 
     //private List<Reviews> reviews;
     private String keywords;
@@ -52,5 +57,18 @@ public class Product {
     //на будущее так как понятия не имею как это реализовать
     private Float rating;
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", prodName='" + prodName + '\'' +
+                ", prodDescription='" + prodDescription + '\'' +
+                ", orgId=" + orgId +
+                ", price=" + price +
+                ", inStock=" + inStock +
+                ", saleId=" + saleId +
+                ", keywords='" + keywords + '\'' +
+                ", rating=" + rating +
+                '}';
+    }
 }

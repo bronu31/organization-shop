@@ -25,13 +25,11 @@ public class ProductController {
     @GetMapping("/products")
     public String productsPage(Model model){
         model.addAttribute("products",productService.getAllProducts());
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 
         return "/products";
     }
     @GetMapping("/product/new")
     public String createProduct(Model model){
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         Product product=new Product();
         model.addAttribute("org_id_select",organizationService.getAllorganizations());
         model.addAttribute("product",product);

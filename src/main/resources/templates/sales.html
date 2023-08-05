@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeLeaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>product page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 </head>
 <body>
 
+<div class="container">
+    <div class="row">
+        <h1> List of products </h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/product/new}" class="btn btn-primary btn-sm mb-3">Add product</a>
+        </div>
+    </div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th> product name</th>
+        <th> product description</th>
+        <th> product organization</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale:${sales}">
+        <td th:text="${sale.saleEnd}"></td>
+        <td th:text="${sale.saleSize}"></td>
+        <td >
+            <div class="form-group">
+                <label> Select organization </label>
+                <select name="prod_id">
+                    <option  th:each=="product:${sale.productsOnSale}" th:value="${product.prodName}" th:text="${product.prodName}"></option>
+                </select>
+            </div>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</div>
 </body>
 </html>
