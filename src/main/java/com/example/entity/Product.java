@@ -3,6 +3,7 @@ package com.example.entity;
 
 import com.example.service.OrganizationService;
 import com.example.service.impl.OrganizationServiceImpl;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
     public Product(Long id, String prodName,
@@ -25,6 +27,7 @@ public class Product {
         this.price = price;
         this.inStock = inStock;
         this.keywords = keywords;
+
     }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")

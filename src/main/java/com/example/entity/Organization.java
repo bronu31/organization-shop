@@ -1,6 +1,8 @@
 package com.example.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,6 +14,7 @@ import javax.persistence.*;
 @ToString
 @AllArgsConstructor
 @Table(name = "organization")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organization_seq")
@@ -20,7 +23,7 @@ public class Organization {
     private String orgName;
 
     private String orgDescription;
-
+@JsonIgnore
     private String orgImage;
 
     @Transient
