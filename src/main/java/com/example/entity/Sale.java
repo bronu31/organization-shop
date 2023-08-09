@@ -15,7 +15,9 @@ import java.util.List;
 public class Sale {
 
     @Id
+
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sale_seq")
+    @SequenceGenerator(name = "sale_seq",sequenceName = "sale_seq",allocationSize = 1,initialValue = 1)
     private Long id;
 
     @ManyToMany

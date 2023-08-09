@@ -19,8 +19,8 @@ import java.util.LinkedList;
 @Controller
 public class SaleController {
 
-    private SaleService saleService;
-    private ProductService productService;
+    private final SaleService saleService;
+    private final ProductService productService;
 
     public SaleController(SaleService saleService, ProductService productService) {
         this.saleService = saleService;

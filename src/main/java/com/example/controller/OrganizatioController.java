@@ -13,7 +13,7 @@ import java.io.IOException;
 @Controller
 public class OrganizatioController {
 
-    private OrganizationService organizationService;
+    private final OrganizationService organizationService;
 
     public OrganizatioController(OrganizationService organizationService) {
         this.organizationService = organizationService;
@@ -58,17 +58,16 @@ public class OrganizatioController {
     @PostMapping("/organizations")
     public String saveOrganization(@ModelAttribute("organization") Organization organization
                                   ,@RequestParam("org_image") MultipartFile multipartFile) throws IOException {
+        if (multipartFile.isEmpty()) {
+            organizationService.saveorganization(organization);
 
-        String file_name= StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        organization.setOrgImage(file_name);
-
-
-
-        Organization temp=organizationService.saveorganization(organization);
-        String uploadDir = "org_images/" + temp.getId();
-        organizationService.saveOrgFile(uploadDir,file_name,multipartFile);
-
-        organizationService.saveorganization(organization);
+        }
+        else {
+            String file_name = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            organization.setOrgImage(file_name);
+            String uploadDir = "org_images/" + organizationService.saveorganization(organization).getId();
+            organizationService.saveOrgFile(uploadDir, file_name, multipartFile);
+        }
         return "redirect:/organizations";
     }
     @GetMapping("/test")

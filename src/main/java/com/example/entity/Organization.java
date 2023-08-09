@@ -18,6 +18,7 @@ import javax.persistence.*;
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organization_seq")
+    @SequenceGenerator(name = "organization_seq",sequenceName = "organization_seq",allocationSize = 1,initialValue = 1)
     private Long id;
 
     private String orgName;
@@ -51,6 +52,7 @@ public class Organization {
         this.id = id;
         this.orgName = OrgName;
         this.orgDescription = OrgDescription;
+        this.orgImage=null;
         //this.org_product = new ArrayList<>();
         this.banned=false;
     }

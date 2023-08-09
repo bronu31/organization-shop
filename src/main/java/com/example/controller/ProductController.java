@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 @Autowired
     private OrganizationService organizationService;
 

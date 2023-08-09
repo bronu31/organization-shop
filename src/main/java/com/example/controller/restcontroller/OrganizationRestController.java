@@ -14,7 +14,11 @@ import java.util.List;
 
 public class OrganizationRestController {
 @Autowired
-    private OrganizationService organizationService;
+    private final OrganizationService organizationService;
+
+    public OrganizationRestController(OrganizationService organizationService) {
+        this.organizationService = organizationService;
+    }
 
     @GetMapping(value = "rest/organization")
     public List<Organization> getOrganizations(){
@@ -25,7 +29,11 @@ public class OrganizationRestController {
     @ResponseBody
     public Organization getOrganizations(@PathVariable Long id){
         System.out.println(organizationService.getorganizationById(id).toString());
+
+
         return organizationService.getorganizationById(id);
+
+
     }
 
 }

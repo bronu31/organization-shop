@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class StudentController {
-    private StudentService studentService;
+    private final StudentService studentService;
 
 
     public StudentController(StudentService studentService) {
