@@ -11,14 +11,7 @@
 Products
 
 <div class="container">
-    <div class="row">
-        <h1> List of products </h1>
-    </div>
-    <div class="row">
-        <div class="col-lg-3">
-            <a th:href="@{/product/new}" class="btn btn-primary btn-sm mb-3">Add product</a>
-        </div>
-    </div>
+
     <table class="table table-striped">
         <thead class="table-dark">
         <tr>
@@ -32,20 +25,14 @@ Products
         </tr>
         </thead>
         <tbody>
-        <tr th:each="product:${products}">
-
-
-            <td  >
-                <a th:href="@{product/details/{id}(id=${product.id})}"
-                   th:text="${product.prodName}" target="_blank" />
-            </td>
-
-            <td th:text="${product.prodDescription}"></td>
-            <td th:text="${product.orgId.orgName}"></td>
-            <td th:text="${product.price}"></td>
-            <td th:text="${product.keywords}"></td>
-            <td th:text="${product.inStock}"></td>
-            <td th:text="${product.rating}"></td>
+        <tr th:object="${product}">
+        <td th:text="${product.prodName}"></td>
+        <td th:text="${product.prodDescription}"></td>
+        <td th:text="${product.orgId.orgName}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.keywords}"></td>
+        <td th:text="${product.inStock}"></td>
+        <td th:text="${product.rating}"></td>
         </tr>
         </tbody>
     </table>

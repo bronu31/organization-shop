@@ -8,6 +8,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
+
+    <style>
+.error {
+	color: #ff0000;
+	font-style: italic;
+	font-weight: bold;
+}
+</style>
 </head>
 <body>
 
@@ -44,15 +52,19 @@
                 <div class="form-group">
 
                     <label> Organization name</label>
-                    <input type="text" name="org_name"
+                    <input type="text" name="orgName"
                            class="form-control"
-                           th:field="*{OrgName}" placeholder="Enter organization name"/>
+
+                           th:field="*{orgName}" placeholder="Enter organization name"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('orgName')}" th:errors="*{orgName}"></div>
                 </div>
+
                 <div class="form-group">
                     <label> Organization description</label>
-                    <input type="text" name="org_description"
+                    <input type="text" name="orgDescription"
                            class="form-control"
-                           th:field="*{OrgDescription}" placeholder="Enter organization description"/>
+                           th:field="*{orgDescription}" placeholder="Enter organization description"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('orgDescription')}" th:errors="*{orgDescription}"></div>
                 </div>
                 <div class="form-group">
                     <label> Organization image</label>

@@ -5,9 +5,11 @@ import com.example.service.OrganizationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -33,7 +35,6 @@ public class OrganizatioController {
         organizationService.saveorganization(organization);
 
 
-        organizationService.getorganizationById(id).toString();
         return "redirect:/organizations";
     }
 
@@ -55,9 +56,13 @@ public class OrganizatioController {
         return "/create_organization";
     }
 
+
     @PostMapping("/organizations")
-    public String saveOrganization(@ModelAttribute("organization") Organization organization
-                                  ,@RequestParam("org_image") MultipartFile multipartFile) throws IOException {
+    public String saveOrganization(@Valid @ModelAttribute("organization") Organization organization
+                                  ,BindingResult bindingResult, @RequestParam("org_image") MultipartFile multipartFile ) throws IOException {
+
+        if (bindingResult.hasErrors()) return "/create_organization";
+
         if (multipartFile.isEmpty()) {
             organizationService.saveorganization(organization);
 

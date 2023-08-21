@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -20,9 +21,9 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "organization_seq")
     @SequenceGenerator(name = "organization_seq",sequenceName = "organization_seq",allocationSize = 1,initialValue = 1)
     private Long id;
-
+@NotBlank(message = "The  Name can't be empty")
     private String orgName;
-
+    @NotBlank(message = "The description can't be empty")
     private String orgDescription;
 @JsonIgnore
     private String orgImage;

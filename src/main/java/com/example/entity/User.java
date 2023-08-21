@@ -1,21 +1,30 @@
 package com.example.entity;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 //@Entity
 @NoArgsConstructor
+//@Entity
+@Getter
+@Setter
+@AllArgsConstructor
 public class User {
 @Id
-@GeneratedValue
+@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+@SequenceGenerator(name = "user_seq",sequenceName = "user_seq",allocationSize = 1,initialValue = 1)
     private Long id;
 
+    @NotBlank
     private String email;
-
+    @NotBlank
     private String password;
 
     private Float Balance;
@@ -23,12 +32,6 @@ public class User {
 
     //private List<Integer> bought_prod;
 
-    public User(Long id, String email, String password, Float balance) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        Balance = balance;
-    }
 
 
 }

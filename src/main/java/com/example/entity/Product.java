@@ -4,9 +4,12 @@ package com.example.entity;
 import com.example.service.OrganizationService;
 import com.example.service.impl.OrganizationServiceImpl;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Getter
@@ -27,23 +30,26 @@ public class Product {
         this.price = price;
         this.inStock = inStock;
         this.keywords = keywords;
+        this.rating=0F;
 
     }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
     @SequenceGenerator(name = "product_seq",sequenceName = "product_seq",allocationSize = 1,initialValue = 1)
     private Long id;
-
+    @NotBlank(message = "The Name can't be empty")
     private String prodName;
-
+    @NotBlank(message = "The description can't be empty")
     private String prodDescription;
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
+    //@NotBlank (message = "Select organization")
     private Organization orgId;
 
-
+    //@NotBlank
     private Float price;
-
+    //@NotNull(message = "Show how many items are available ")
+    //TODO Find a way to check Numbers
     private Integer inStock;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -55,6 +61,7 @@ public class Product {
     private List<Sale> saleId;
 
     //private List<Reviews> reviews;
+    @NotEmpty(message = "Add keywords to your product")
     private String keywords;
 
     //TODO Сделать таблицу характеристик private

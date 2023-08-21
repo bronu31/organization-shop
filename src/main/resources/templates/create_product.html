@@ -46,6 +46,8 @@
                     <input type="text" name="prod_name"
                            class="form-control"
                            th:field="*{prodName}" placeholder="Enter product name"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('prodName')}" th:errors="*{prodName}"></div>
+
                 </div>
 
                 <div class="form-group">
@@ -53,6 +55,7 @@
                     <input type="text" name="prod_description"
                            class="form-control"
                            th:field="*{prodDescription}" placeholder="Enter product description"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('prodDescription')}" th:errors="*{prodDescription}"></div>
                 </div>
 
                 <div class="form-group">
@@ -70,6 +73,8 @@
                     <input type="number" name="price"
                            class="form-control"
                            th:field="*{price}" placeholder="157" step="0.01"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+
                 </div>
 
                 <div class="form-group">
@@ -77,6 +82,8 @@
                     <input type="text" name="in_stock"
                            class="form-control"
                            th:field="*{inStock}" placeholder="Select organization"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('inStock')}" th:errors="*{inStock}"></div>
+
                 </div>
 
                 <div class="form-group">
@@ -84,6 +91,8 @@
                     <input type="text" name="keywords"
                            class="form-control"
                            th:field="*{keywords}" placeholder="Select organization"/>
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('keywords')}" th:errors="*{keywords}"></div>
+
                 </div>
                 <div class="box-footer">
                     <button type="submit" class="btn btn-primary">

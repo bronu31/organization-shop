@@ -6,10 +6,10 @@ import com.example.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class ProductController {
@@ -35,9 +35,18 @@ public class ProductController {
         model.addAttribute("product",product);
         return "/create_product";
     }
+
+    @GetMapping("/product/details/{id}")
+    public String detailsOnProduct(Model model, @PathVariable Long id){
+
+            model.addAttribute("product",productService.getProductById(id));
+        return "/product_details";
+    }
+
     @PostMapping("/products/buffer")
-    public String saveProduct(@ModelAttribute("product") Product product
-            ,@RequestParam("org_name_id") String  strimg){
+    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult
+            , @RequestParam("org_name_id") String  strimg){
+        if (bindingResult.hasErrors()) return "/create_product";
         product.setOrgId(organizationService.getOrganizationByName(strimg));
 
         productService.saveProduct(product);
