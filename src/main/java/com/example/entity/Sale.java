@@ -22,8 +22,9 @@ public class Sale {
     @SequenceGenerator(name = "sale_seq",sequenceName = "sale_seq",allocationSize = 1,initialValue = 1)
     private Long id;
 
-    @ManyToMany
+    @OneToMany
     @NotNull
+    @PrimaryKeyJoinColumn
     private List<Product> productsOnSale;
     @NotNull
     private Byte saleSize;

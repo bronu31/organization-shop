@@ -66,6 +66,7 @@ public class Product {
 
     //TODO Сделать таблицу характеристик private
     //на будущее так как понятия не имею как это реализовать
+    //судя по всему hash таблица
     private Float rating;
 
     @Override

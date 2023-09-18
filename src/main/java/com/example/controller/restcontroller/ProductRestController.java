@@ -1,7 +1,6 @@
 package com.example.controller.restcontroller;
 
 
-import com.example.entity.Organization;
 import com.example.entity.Product;
 import com.example.service.ProductService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +14,10 @@ public class ProductRestController {
 
     private final ProductService productService;
 
+
     public ProductRestController(ProductService productService) {
         this.productService = productService;
+
     }
 
     @GetMapping(value = "rest/product")
@@ -28,5 +29,6 @@ public class ProductRestController {
     public Product getOrganizations(@PathVariable Long id){
         return productService.getProductById(id);
     }
+
 
 }

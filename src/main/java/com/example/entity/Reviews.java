@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-//@Entity
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Reviews {
     @SequenceGenerator(name = "reviews_seq",sequenceName = "reviews_seq",allocationSize = 1,initialValue = 1)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     @NotNull
     private User user;
