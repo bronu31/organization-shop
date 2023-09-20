@@ -27,21 +27,33 @@ public class User {
     @NotBlank
     private String email;
 
-    @NotBlank
-    private String name;
+
+    //private String name;
     @NotBlank
     private String password;
 
     private Float balance;
 
-    @OneToMany
+   /* @OneToMany
     @PrimaryKeyJoinColumn
     private List<Product> bought_prod;
-
+*/
     public User(String email, String password) {
         this.email = email;
         this.password = password;
         this.balance=0.0f;
-        this.bought_prod=new LinkedList<>();
+        //this.bought_prod=new LinkedList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                //", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", balance=" + balance +
+               // ", bought_prod=" + bought_prod +
+                '}';
     }
 }

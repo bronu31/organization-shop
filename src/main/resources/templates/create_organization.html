@@ -29,11 +29,12 @@
     </button>
 
     <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <div class="collapse navbar-collapse" id="collapsibleNavbar" th:fragment="navbar_for_all">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/students}">Student management</a>
                 <a class="nav-link" th:href="@{/organizations}">Companies</a>
+                <a class="nav-link" th:href="@{/products}">Products</a>
+                <a class="nav-link" th:href="@{/sales}">Sales</a>
                 <a class="nav-link" th:href="@{/logout}">Logout</a>
             </li>
 

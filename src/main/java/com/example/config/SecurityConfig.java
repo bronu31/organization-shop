@@ -1,27 +1,34 @@
 package com.example.config;
 
 
+import com.example.service.impl.CustomUserDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
+
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.DefaultSecurityFilterChain;
+
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    @Autowired
+    private DataSource dataSource;
 
 
 
@@ -29,26 +36,29 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return new CustomUserDetailsService();
+    }
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        System.out.println("provider");
+        DaoAuthenticationProvider authenticationProvider= new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
 
 
 
     @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         System.out.println("ooooo");
-       /* http.csrf().disable().authorizeRequests()
-                .antMatchers("/products").authenticated()
-                .antMatchers("/login")
-                .anonymous().anyRequest().permitAll()
-                .and()
-                .formLogin()
-                .loginPage("/login").defaultSuccessUrl("/products").permitAll()
-                .and()
-                .logout().logoutUrl("/logout").permitAll()
-                .and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);*/
 
-        http.authorizeHttpRequests(authz->authz
-                .antMatchers("/temp_enter").permitAll()
+        http//.csrf().disable()
+                .authorizeHttpRequests(authz->authz
+                .antMatchers("/register_temp").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/**").authenticated()
 
@@ -60,7 +70,9 @@ public class SecurityConfig {
                         .permitAll())
                 .formLogin(form ->form.loginPage("/login").permitAll()
                 .defaultSuccessUrl("/organizations")
-                )
+
+
+                ).authenticationProvider(authenticationProvider())
         //).formLogin(withDefaults())
                 //.logout((logout) -> logout.logoutSuccessUrl("/login"))
                 ;
@@ -69,7 +81,18 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
+    /*public void configure(AuthenticationManagerBuilder managerBuilder) throws Exception {
+        System.out.println("config");
+        /*managerBuilder.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select name,email,password from users")
+                .authoritiesByUsernameQuery("select name,role from users");
+
+        System.out.println("yes");*/
+       // managerBuilder.authenticationProvider(authenticationProvider());
+  //  }
+
+    /*@Bean
     public InMemoryUserDetailsManager userDetailsService() {
         UserDetails user1 = User.withUsername("user1")
                 .password(passwordEncoder().encode("user1"))
@@ -84,5 +107,8 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
         return new InMemoryUserDetailsManager(user1, user2, admin);
-    }
+    }*/
+
+
 }
+
