@@ -14,12 +14,6 @@
     </style>
 </head>
 <body>
-<nav>
-  <div>
-    <a class="nav-link" th:href="@{/logout}">Logout</a>
-  </div>
-</nav>
-
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
   <a class="navbar-brand" href="#">Navbar</a>
@@ -30,16 +24,15 @@
   </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/students}">Student management</a>
-        <a class="nav-link" th:href="@{/products}">Products</a>
-      </li>
 
-    </ul>
-  </div>
+  <div th:replace="snippets/navigation.html"></div>
+
+  <!-- Navbar links -->
+
+
+
 </nav>
+
 Companies
 
 <div class="container">

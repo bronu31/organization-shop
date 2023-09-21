@@ -21,15 +21,13 @@
   </button>
 
   <!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/students}">Student management</a>
-        <a class="nav-link" th:href="@{/companies}">Companies</a>
-      </li>
 
-    </ul>
-  </div>
+  <div th:replace="snippets/navigation.html"></div>
+
+  <!-- Navbar links -->
+
+
+
 </nav>
 <br>
 <br>
